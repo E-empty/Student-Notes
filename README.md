@@ -43,7 +43,7 @@ Dodanie funkcji przywracania hasła - umożliwienie użytkownikom przywracania z
 
 Implementacja funkcji statystyk - umożliwienie użytkownikom śledzenia liczby notatek, kategorii, itp. w aplikacji oraz innych statystykach związanych z korzystaniem z niej, takich jak najczęściej używane słowa kluczowe, czas spędzony na edycji notatek, itp. Dodatkowo, warto rozważyć integrację z narzędziami do współpracy, takimi jak Google Drive czy Dropbox, co umożliwi użytkownikom łatwe przechowywanie i udostępnianie swoich notatek w chmurze. Ważnym elementem projektu jest także projektowanie intuicyjnego i przyjaznego interfejsu użytkownika, który pozwoli na łatwe i szybkie zarządzanie notatkami.
 
-##=== REALNE FUNKCJONALNOŚCI === 
+## === REALNE FUNKCJONALNOŚCI ===
 - Rejestracja użytkownika
 - Tworzenie notatek
 - Edycja notatek
