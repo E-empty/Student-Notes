@@ -1,7 +1,7 @@
 ## Student-Notes
-#Note taking application
+Note taking application
 
-#Pomysł projektu aplikacji: Aplikacja do zarządzania notatkami studenckimi, umożliwiająca tworzenie, edycję i udostępnianie notatek, a także ich sortowanie i wyszukiwanie.
+# Pomysł projektu aplikacji: Aplikacja do zarządzania notatkami studenckimi, umożliwiająca tworzenie, edycję i udostępnianie notatek, a także ich sortowanie i wyszukiwanie.
 
 
 ## 20 kroków do prawdopodobnej implementacji
