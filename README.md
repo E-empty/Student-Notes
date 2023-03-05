@@ -53,3 +53,4 @@ Implementacja funkcji statystyk - umożliwienie użytkownikom śledzenia liczby 
 - Powiadomienia użytkownika o edycji / tworzeniu nowych notatek
 - Kopia zapasowa notatek 
 - Zarządzanie uprawnieniami notatek 
+- Dopracowanie interfejsu użytkownika
