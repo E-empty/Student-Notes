@@ -1,4 +1,5 @@
-\NewTest\settings_example
+/NewTest/settings_example.py
+/NewTest/__pycache__.py
 # Logs
 logs
 *.log
