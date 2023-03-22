@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Rejestracja</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <h3>Rejestracja</h3>
+
+        <form action="" method="post">
+            {% csrf_token %}
+            <label for="">Nazwa użytkownika</label>
+            <input type="text" id="username" name="username" placeholder="Stwórz nazwę użytkownika (tylko litery i cyfry)" Requierd>
+            <br>
+            <label for="">Imię</label>
+            <input type="text" id="fname" name="fname" placeholder="Wpisz swoje imię" Requierd>
+            <br>
+            <label for="">Nazwisko</label>
+            <input type="text" id="lname" name="lname" placeholder="Wpisz swoje nazwisko" Requierd>
+            <br>
+            <label for="">Adres e-mail</label>
+            <input type="email" id="email" name="email" placeholder="Wpisz swój adres e-mail" Requierd>
+            <br>
+            <label for="">Hasło</label>
+            <input type="password" id="pass1" name="pass1" placeholder="Stwóz swoje hasło" Requierd>
+            <br>
+            <label for="">Potwierdź hasło</label>
+            <input type="password" id="pass2" name="pass2" placeholder="Powtórz hasło" Requierd>
+            <br>
+            <button type="submit"> Zarejestruj się </button>
+        </form>
+
+        
+        <script src="" async defer></script>
+    </body>
+</html>
+ 
