@@ -1,35 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Logowanie</title>
-        <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <title>Rejestracja</title>
     </head>
     <body>
-        <h3>Logowanie</h3>
-        {% for message in messages %}
-        <div class="alert alert-{{ message.tags }} alert-dismissible fade show " role="alert">
-         {{ message }}
-            </div>
-            <br>
-            {% endfor %}
-        <form action="/signin" method="post">
-            {% csrf_token %}
-            <label for="">Nazwa użytkownika</label>
-            <input type="text" id="username" name="username" placeholder="Wpisz nazwę użytkownika" Requierd>
-            <br>
-            <label for="">Hasło</label>
-            <input type="password" id="pass1" name="pass1" placeholder="Wpisz hasło" Requierd>
-            <br>
-            <br>
-            <button type="submit"> Zaloguj się </button>
-        </form>
-        <br>
-        <button type="submit"><a href="{% url 'home' %}">Powrót do strony głównej</a></button>
-        
-        <script src="" async defer></script>
-    </body>
+
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <strong>Message:</strong> {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+    </div>
+    {% endfor %}
+
+    <h3>Zaloguj się!</h3>
+    <form method="post" action="/signin" class="mb-2">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="username">Nazwa użytkownika</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Wpisz nazwę użytkownika" Required>
+        </div>
+        <div class="form-group">
+            <label for="pass1">Hasło</label>
+            <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Wpisz hasło" Required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Zaloguj się</button>
+    </form>
+</body>
 </html>

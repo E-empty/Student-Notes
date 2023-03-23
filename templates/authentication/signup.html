@@ -1,47 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Rejestracja</title>
-        <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <title>Rejestracja</title>
     </head>
     <body>
-        <h3>Rejestracja</h3>
-        {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        <form action="" method="POST">
-            {% csrf_token %}
-            <label for="">Nazwa użytkownika</label>
-            <input type="text" id="username" name="username" placeholder="Stwórz nazwę użytkownika (tylko litery i cyfry)" Requierd>
-            <br>
-            <label for="">Imię</label>
-            <input type="text" id="fname" name="fname" placeholder="Wpisz swoje imię" Requierd>
-            <br>
-            <label for="">Nazwisko</label>
-            <input type="text" id="lname" name="lname" placeholder="Wpisz swoje nazwisko" Requierd>
-            <br>
-            <label for="">Adres e-mail</label>
-            <input type="email" id="email" name="email" placeholder="Wpisz swój adres e-mail" Requierd>
-            <br>
-            <label for="">Hasło</label>
-            <input type="password" id="pass1" name="pass1" placeholder="Stwóz swoje hasło" Requierd>
-            <br>
-            <label for="">Potwierdź hasło</label>
-            <input type="password" id="pass2" name="pass2" placeholder="Powtórz hasło" Requierd>
-            <br>
-            <button type="submit"> Zarejestruj się </button>
-        </form>
-        <br>
-        <button type="submit"><a href="{% url 'home' %}">Powrót do strony głównej</a></button>
-        <script src="" async defer></script>
-    </body>
+
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <strong>Message:</strong> {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+    </div>
+    {% endfor %}
+
+    <h3>Stwórz swoje konto!</h3>
+    <form method="post" action="/signup">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="username">Nazwa użytkownika</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Stwórz nazwę użytkownika (tylko litery i cyfry)" Required>
+        </div>
+        <div class="form-group">
+            <label for="fname">Imię</label>
+            <input type="text" class="form-control" id="fname" name="fname" placeholder="Wpisz swoje imię" Required>
+        </div>
+        <div class="form-group">
+            <label for="lname">Nazwisko</label>
+            <input type="text" class="form-control" id="lname" name="lname" placeholder="Wpisz swoje nazwisko" Required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Wpisz swój adres e-mail" Required>
+        </div>
+        <div class="form-group">
+            <label for="pass1">Hasło</label>
+            <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Stwóz swoje hasło" Required>
+        </div>
+        <div class="form-group">
+            <label for="pass2">Potwierdź hasło</label>
+            <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Powtórz hasło" Required>
+        </div>
+        <button type="submit" class="btn btn-primary">Zarejestruj się</button>
+    </form>
+</body>
 </html>
- 
