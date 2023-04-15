@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div class="container">
+    <h1 class="my-4">Moje notatki</h1>
+    <div class="row">
+      {% for note in notes %}
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h2 class="card-title">{{ note.title }}</h2>
+              <h5 class="card-subtitle mb-2 text-muted">{{ note.category.name }}</h5>
+              <p class="card-text">{{ note.note }}</p>   
+              <br>           
+              {% if note.picture %}
+              <img src="{{ note.picture.url }}"
+              width=500>
+              {% endif %}
+              <br>
+            </div>
+            <div class="card-footer">
+              <a href="{% url 'updateNote' note.pk %}" class="card-link">Edytuj</a>
+              <a href="{% url 'deleteNote' note.pk %}" class="card-link">Usuń</a>
+              <a href="{% url 'home'  %}" class="card-link">Wróć na stronę główną</a>
+        </div>
+      </div>
+    </div>
+  {% empty %}
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          <li>Nie masz żadnych notatek</li>
+          <a href="{% url 'create_notes' %}" class="card-link">Stwórz notatkę</a>
+          <a href="{% url 'home'  %}" class="card-link">Wróć na stronę główną</a>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+  </div>
+{% endblock %}

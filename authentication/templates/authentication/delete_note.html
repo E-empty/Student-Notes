@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Usuwanie notatki</h1>
+<p>Czy jesteś pewny że chcesz usunąć notatke: "{{ note.title }}"?</p>
+<form method="POST" action="{% url 'deleteNote' note.id %}">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-danger">Tak</button>
+  <a href="{% url 'notes_list' %}" class="btn btn-secondary">Anuluj</a>
+  <input type="hidden" name="confirm_delete" value="1">
+</form>
+{% endblock %}

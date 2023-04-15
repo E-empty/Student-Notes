@@ -1,0 +1,69 @@
+﻿{% extends 'base.html' %}
+
+{% block content %}
+
+  <h1>Edycja notatki</h1>
+  <form method="POST" action="{% url 'updateNote' note.id %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="title">Tytuł</label>
+      <input type="text" class="form-control" id="title" name="title" value="{{ note.title }}">
+    </div>
+    <div class="form-group">
+      <label for="category">Kategoria:</label>
+      <select name="category" class="form-control" id="category">
+        {% if note.category %}
+          <option value="{{ note.category }}" selected>{{ note.category }}</option>
+        {% else %}
+          <option value="" selected>Wybierz kategorię</option>
+        {% endif %}
+        {% for category, name in form.category.field.choices %}
+          {% if category != note.category %}
+            {% if not forloop.first %}
+              <option value="{{ category }}"
+                {% if category == note.category_created %}
+                  selected
+                {% endif %}>
+                {{ name }}
+              </option>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+    </select>
+    </div>
+    <div class="form-group">
+      <label for="note">Treść</label>
+      <textarea class="form-control" id="note" name="note" rows="5">{{ note.note }}</textarea>
+    </div>
+    {% if note.picture %}
+    <div class="form-group">
+      <label for="picture">Obecny załącznik:</label>
+      <br>
+      <img src="{{ note.picture.url }}" alt="{{ note.title }}" class="img-thumbnail">
+      <br>
+      <label>
+        <input type="radio" name="picture_action" value="keep" checked>
+        Pozostaw obecny załącznik
+      </label>
+      <label>
+        <input type="radio" name="picture_action" value="delete">
+        Usuń obecny załącznik
+      </label>
+    </div>
+  {% else %}
+    <div class="form-group">
+      <label for="picture">Załącznik:</label>
+      <input type="file" class="form-control-file" id="picture" name="picture">
+    </div>
+  {% endif %}
+  <br>
+  <button type="submit" class="btn btn-primary">Zmień</button>
+  <a href="{% url 'notes_list' %}" class="btn btn-primary">Wyjdź bez zmian</a>
+</form>
+{% endblock %}
+
+
+
+
+
+

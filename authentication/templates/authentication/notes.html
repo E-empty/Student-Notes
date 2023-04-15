@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Moje notatki</h1>
+  <ul>
+    {% for note in notes %}
+      <li>{{ note.title }}</li>
+    {% empty %}
+      <li>Nie masz żadnych notatek</li>
+      
+    {% endfor %}
+  </ul>
+  <a href="{% url 'notes_list' %}" class="btn btn-primary">Podgląd notatek</a>
+  <a href="{% url 'create_notes' %}" class="btn btn-primary">Stwórz notatke</a>
+  <a href="{% url 'notes_list' %}" class="btn btn-primary">Edycja/usuwanie notatek</a>
+  <a href="{% url 'home'  %}" class="btn btn-primary">Wróć na stronę główną</a>
+{% endblock %}

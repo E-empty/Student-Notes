@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h2>Lista grup</h2>
+  <ul>
+    {% for group in groups %}
+    {% if group.name == request.user.username %}
+    <li>
+    <a href="{% url 'group_detail' group.id %}">{{ group.name }}</a>
+    </li>
+    {% else %}
+      <li>
+        <a href="{% url 'group_detail' group.id %}">{{ group.name }}</a>
+        <a href="{% url 'group_update' group.id %}" class="btn btn-primary btn-sm">Edytuj</a>
+        <a href="{% url 'group_delete' group.id %}" class="btn btn-danger btn-sm">Usuń</a>
+      </li>
+    {% endif %}
+  {% endfor %}
+    {% if not groups %}
+      <li>Nie znaleziono żadnych grup.</li>
+      <a href="{% url 'group_create' %}" class="card-link">Stwórz grupę</a>
+      <a href="{% url 'home'  %}" class="card-link">Powrót do strony głównej</a>
+    {% endif %}
+  </ul>
+      <div class="card-body">
+        <a href="{% url 'group_create' %}" class="card-link">Stwórz grupę</a>
+        <a href="{% url 'home'  %}" class="card-link">Powrót do strony głównej</a>
+      </div>
+{% endblock %}

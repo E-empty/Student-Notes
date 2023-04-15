@@ -1,0 +1,54 @@
+
+
+// Define custom colors
+$primary: #3d3d3d;
+$secondary: #6c757d;
+$light: #f8f9fa;
+$dark: #343a40;
+$danger: #dc3545;
+
+// Override Bootstrap variables
+$body-color: $primary;
+$body-bg: $light;
+$link-color: $secondary;
+$btn-color: $secondary;
+$btn-bg: $light;
+
+// Add custom styles
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: $primary;
+  background-color: $light;
+}
+
+a {
+  color: $secondary;
+  text-decoration: none;
+}
+
+.btn {
+  color: $body-color;
+  background-color: $btn-bg;
+  border-color: $btn-color;
+  &:hover {
+    color: $light;
+    background-color: $btn-color;
+  }
+}
+
+.alert {
+  color: $body-color;
+  background-color: $light;
+  border-color: $secondary;
+}
+.alert-danger {
+  color: $dark;
+  background-color: $danger;
+  border-color: $danger;
+}
+
+.card-body img {
+  max-width: 100%;
+  height: auto;
+  }

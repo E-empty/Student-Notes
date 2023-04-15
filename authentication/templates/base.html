@@ -1,0 +1,58 @@
+{% load static %}
+{% load sass_tags %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Student Notes{% endblock %}</title>
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% sass_src 'styles.scss' %}">
+
+</head>
+<body>
+    {% bootstrap_messages %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'home' %}">Student Notes</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'notes' %}">Moje notatki</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'create_notes' %}">Stwórz notatke</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'group_list' %}">Grupy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'signout' %}">WYloguj się</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'signup' %}">Rejestracja</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'signin' %}">Logowanie</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    {% bootstrap_javascript %}
+</body>
+</html>

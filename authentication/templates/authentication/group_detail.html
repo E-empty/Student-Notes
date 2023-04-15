@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h2>Informacje o grupie</h2>
+  <p>Nazwa: {{ group.name }}</p>
+
+  <h3>Dodaj użytkownika do grupy</h3>
+  <form method="post">
+    {% csrf_token %}
+    {{ add_user_form.as_p }}
+    <button type="submit">Dodaj</button>
+  </form>
+  <a href="{% url 'group_list' %}">Powrót do listy grup</a>
+  <h3>Inni użytkownicy w grupie:</h3>
+  <ul>
+    {% for user in users %}
+      <li>{{ user.username }}</li>
+    {% empty %}
+      <li>Brak użytkowników w grupie.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

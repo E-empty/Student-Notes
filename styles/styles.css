@@ -1,0 +1,31 @@
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #3d3d3d;
+  background-color: #f8f9fa; }
+
+a {
+  color: #6c757d;
+  text-decoration: none; }
+
+.btn {
+  color: #3d3d3d;
+  background-color: #f8f9fa;
+  border-color: #6c757d; }
+  .btn:hover {
+    color: #f8f9fa;
+    background-color: #6c757d; }
+
+.alert {
+  color: #3d3d3d;
+  background-color: #f8f9fa;
+  border-color: #6c757d; }
+
+.alert-danger {
+  color: #343a40;
+  background-color: #dc3545;
+  border-color: #dc3545; }
+
+.card-body img {
+  max-width: 100%;
+  height: auto; }
