@@ -64,6 +64,7 @@ class Note(models.Model):
     picture = models.ImageField(null=True, blank=True, upload_to="media/")
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
+    groups = models.ManyToManyField(MyGroup)
 
     def __str__(self):
         return self.title

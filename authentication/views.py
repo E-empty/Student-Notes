@@ -9,7 +9,7 @@ from .forms import AddUserForm, NoteForm
 from .models import MyGroup, Note, Category, User
 from django.core.files.storage import FileSystemStorage
 from .forms import GroupForm
-from django.contrib.auth.models import Group
+
 
 @login_required
 def group_list(request):
@@ -18,14 +18,14 @@ def group_list(request):
 
 def group_detail(request, pk):
     group = get_object_or_404(MyGroup, pk=pk)
-    user_groups = User.groups.through.objects.filter(pk=pk)
-    users = [user_group.user for user_group in user_groups]
+    users = User.objects.filter(groups=group)
+    notes = Note.objects.filter(groups=group)
     add_user_form = AddUserForm(group_id=pk, data=request.POST or None)
     if request.method == 'POST' and add_user_form.is_valid():
         add_user_form.save()
         messages.success(request, 'Użytkownik został dodany do grupy.')
         return redirect('group_detail', pk=pk)
-    return render(request, 'authentication/group_detail.html', {'group': group, 'users': users, 'add_user_form': add_user_form})
+    return render(request, 'authentication/group_detail.html', {'group': group, 'users': users, 'notes': notes, 'add_user_form': add_user_form})
 
 @login_required
 def group_create(request):
@@ -223,8 +223,8 @@ def create_note_view(request):
 
             group_id = request.POST.get('groups')
             if group_id:
-                groups = request.user.groups.all()
-                groups.notes.add(note)
+                groups = MyGroup.objects.get(pk=group_id)
+                note.groups.add(groups)
 
             return redirect('notes_list')  # Redirect to notes list page after saving
     else:

@@ -84,8 +84,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',  
         'NAME': 'db5',  
         'USER': 'admin',  
-        'PASSWORD': 'password',  
-        'HOST': 'host',  
+        'PASSWORD': 'Pass1234',  
+        'HOST': 'myfirstsql.ci79dxbneeek.us-east-1.rds.amazonaws.com',  
         'PORT': '3306',  
         'OPTIONS': {  
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"  
@@ -152,5 +152,4 @@ STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'sass_processor.finders.CssFinder',
 ]
-
 
