@@ -34,7 +34,7 @@ def group_create(request):
         form = GroupForm(request.POST)
         if form.is_valid():
             group = form.save(commit=False)
-            group.admin = request.user
+            group.owner = request.user
             if MyGroup.objects.filter(name=group.name).exists():
                 messages.error(request, 'Grupa o takiej nazwie już istnieje.')
                 return redirect('group_create')
@@ -83,8 +83,13 @@ def group_delete(request, pk):
 
     return render(request, 'authentication/group_delete.html', {'group': group})
     
+def remove_user_from_group(request, group_id, user_id):
+    group = get_object_or_404(MyGroup, id=group_id)
+    user = get_object_or_404(User, id=user_id)
+    if request.user == group.owner:
+        user.groups.remove(group)
+    return redirect('group_detail', group_id)
 
-# Create your views here.
 def home(request):
     return render(request, "authentication/index.html")
 
@@ -170,7 +175,7 @@ def signup(request):
         myuser.last_name = lname
         myuser.save()
         messages.success(request, "Twoje konto zostało poprawnie założone")
-        group = MyGroup.objects.create(name=username)
+        group = MyGroup.objects.create(name=username, owner=myuser)
         myuser.groups.add(group)
         return redirect('signin')
 
