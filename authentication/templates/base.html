@@ -9,17 +9,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Student Notes{% endblock %}</title>
     {% bootstrap_css %}
     <link rel="stylesheet" href="{% sass_src 'styles.scss' %}">
-    <title>Student Notes</title>
+
 </head>
 <body>
     {% bootstrap_messages %}
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{% url 'home' %}">
-            <img src="{% static 'images/logo.png' %}" alt="logo" style="height: 50px; vertical-align: middle;">
-            <span style="font-size: 24px; vertical-align: middle;">Student Notes</span>
-          </a>
+        <a class="navbar-brand" href="{% url 'home' %}">Student Notes</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -33,10 +31,7 @@
                     <a class="nav-link" href="{% url 'create_notes' %}">Stwórz notatke</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'group_list' %}">Grupy</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'signout' %}">Wyloguj się</a>
+                    <a class="nav-link" href="{% url 'signout' %}">WYloguj się</a>
                 </li>
                 {% else %}
                 <li class="nav-item">
