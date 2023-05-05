@@ -14,8 +14,7 @@
               <p class="card-text">{{ note.note }}</p>   
               <br>           
               {% if note.picture %}
-              <img src="{{ note.picture.url }}"
-              width=500>
+              <img src="{{ note.picture.url }}" class="img-fluid" alt="{{ note.title }}">
               {% endif %}
               <br>
             </div>

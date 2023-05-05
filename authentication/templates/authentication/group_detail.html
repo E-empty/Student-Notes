@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+  
   <h2>Informacje o grupie</h2>
   <p>Nazwa: {{ group.name }}</p>
   <p>Właściciel: {{ group.owner }}</p>
@@ -10,10 +10,9 @@
   <form method="post">
     {% csrf_token %}
     {{ add_user_form.as_p }}
-    <button type="submit">Dodaj</button>
+    <button type="submit" class="btn btn-primary">Dodaj</button>
   </form>
   {% endif %}
-  <a href="{% url 'group_list' %}">Powrót do listy grup</a>
   <h3>Użytkownicy w grupie:</h3>
   <ul>
   {% for user in users %}
@@ -63,5 +62,6 @@
   {% empty %}
     <li>Brak notatek w grupie.</li>
   {% endfor %}
+  <button type="button" class="btn btn-primary" onclick="window.location.href='{% url 'group_list' %}'">Powrót do listy grup</button>
 </ul>
 {% endblock %}
