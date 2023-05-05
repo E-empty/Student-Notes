@@ -9,7 +9,7 @@ class GroupForm(forms.ModelForm):
         model = MyGroup
         fields = ('name',)
         labels = {'name': 'Nazwa'}
-        
+
 
 class NoteForm(forms.ModelForm):
     delete_picture = forms.BooleanField(required=False)

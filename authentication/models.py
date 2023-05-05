@@ -7,6 +7,12 @@ from django.contrib.auth.models import AbstractUser, Permission
 class MyGroup(models.Model):
     name = models.CharField(max_length=255)
     permissions = models.CharField(max_length=255, default="admin")
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        verbose_name=('owner'),
+        on_delete=models.CASCADE,
+        related_name='owned_groups',
+    )
     users = models.ManyToManyField(settings.AUTH_USER_MODEL)
 
     def __str__(self):

@@ -4,21 +4,31 @@
 
   <h2>Informacje o grupie</h2>
   <p>Nazwa: {{ group.name }}</p>
-
+  <p>Właściciel: {{ group.owner }}</p>
+  {% if user == group.owner %}
   <h3>Dodaj użytkownika do grupy</h3>
   <form method="post">
     {% csrf_token %}
     {{ add_user_form.as_p }}
     <button type="submit">Dodaj</button>
   </form>
+  {% endif %}
   <a href="{% url 'group_list' %}">Powrót do listy grup</a>
   <h3>Użytkownicy w grupie:</h3>
   <ul>
-    {% for user in users %}
-      <li>{{ user.username }}</li>
-    {% empty %}
-      <li>Brak użytkowników w grupie.</li>
-    {% endfor %}
+  {% for user in users %}
+  {% if user != group.owner %}
+    <li>{{ user.username }}</li> 
+    {% if user != request.user %}
+    <form method="post" action="{% url 'remove_user' group_id=user.groups.first.id user_id=user.id %}">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-sm btn-danger">Usuń z grupy</button>
+    </form>
+  {% endif %}
+  {% endif %}
+{% empty %}
+  <li>Brak użytkowników w grupie.</li>
+{% endfor %}
   </ul>
   <h3>Notatki w grupie:</h3>
 <ul>
@@ -27,16 +37,29 @@
       <div class="col-md-4">
         <div class="card mb-4">
           <div class="card-body">
-            <h2 class="card-title">{{ note.title }}</h2>
-            <h5 class="card-subtitle mb-2 text-muted">{{ note.category.name }}</h5>
-            <p class="card-text">{{ note.note }}</p>   
-            <br>           
-            {% if note.picture %}
-            <img src="{{ note.picture.url }}"
-            width=500>
-            {% endif %}
-            <br>
+            <div class="note">
+              <h2 class="card-title">{{ note.title }}</h2>
+              <h5 class="card-subtitle mb-2 text-muted">{{ note.category.name }}</h5>
+              <p class="card-text">{{ note.note }}</p>   
+              <br>           
+              {% if note.picture %}
+              <img src="{{ note.picture.url }}"
+              width=500>
+              {% endif %}
+              <br>
+              {% if note.owner == request.user or group.owner == request.user%}
+                <a href="{% url 'updateNote' note.id %}" class="btn btn-primary">Edytuj</a>
+                <form method="post" action="{% url 'deleteNote' note.id %}">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-danger">Usuń</button>
+                </form>
+              {% else %}
+              <p style="font-size: 12px; color: #555555;">Nie jesteś właścicielem notatki/grupy, nie możesz jej zmienić ani usunąć.</p>
+              {% endif %}
+            </div>
           </div>
+        </div>
+      </div>
   {% empty %}
     <li>Brak notatek w grupie.</li>
   {% endfor %}
