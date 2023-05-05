@@ -12,10 +12,8 @@
     {% else %}
       <li>
         <a href="{% url 'group_detail' group.id %}">{{ group.name }}</a>
-        {% if user == group.owner %}
         <a href="{% url 'group_update' group.id %}" class="btn btn-primary btn-sm">Edytuj</a>
         <a href="{% url 'group_delete' group.id %}" class="btn btn-danger btn-sm">Usuń</a>
-        {% endif %}
       </li>
     {% endif %}
   {% endfor %}
