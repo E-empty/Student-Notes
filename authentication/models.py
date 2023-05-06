@@ -65,7 +65,7 @@ class User(AbstractUser):
 
 class Note(models.Model):
     title = models.CharField(max_length=255)
-    category = models.ForeignKey(Category, on_delete=models.PROTECT, null=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     note = models.TextField()
     picture = models.ImageField(null=True, blank=True, upload_to="media/")
     owner = models.ForeignKey(User, on_delete=models.CASCADE)

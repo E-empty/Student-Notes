@@ -1,7 +1,19 @@
-{% extends 'base.html' %}
+﻿{% extends 'base.html' %}
 
 {% block content %}
 
+<form method="GET">
+  <div class="form-group">
+    <label for="category">Kategoria:</label>
+    <select name="category" id="category" class="form-control">
+      <option value="">Wszystkie</option>
+      {% for category in categories %}
+      <option value="{{ category.id }}" {% if selected_category == category.id %}selected="selected"{% endif %}>{{ category.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Filtruj</button>
+</form>
   <div class="container">
     <h1 class="my-4">Moje notatki</h1>
     <div class="row">
@@ -14,7 +26,8 @@
               <p class="card-text">{{ note.note }}</p>   
               <br>           
               {% if note.picture %}
-              <img src="{{ note.picture.url }}" class="img-fluid" alt="{{ note.title }}">
+              <img src="{{ note.picture.url }}"
+              width=500>
               {% endif %}
               <br>
             </div>

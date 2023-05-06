@@ -19,13 +19,18 @@ def group_list(request):
 def group_detail(request, pk):
     group = get_object_or_404(MyGroup, pk=pk)
     users = User.objects.filter(groups=group)
-    notes = Note.objects.filter(groups=group)
+    categories = Category.objects.all()
+    selected_category = request.GET.get('category', '')
+    if selected_category:
+        notes = Note.objects.filter(groups=group, category=selected_category)
+    else:
+        notes = Note.objects.filter(groups=group)
     add_user_form = AddUserForm(group_id=pk, data=request.POST or None)
     if request.method == 'POST' and add_user_form.is_valid():
         add_user_form.save()
         messages.success(request, 'Użytkownik został dodany do grupy.')
         return redirect('group_detail', pk=pk)
-    return render(request, 'authentication/group_detail.html', {'group': group, 'users': users, 'notes': notes, 'add_user_form': add_user_form})
+    return render(request, 'authentication/group_detail.html', {'group': group, 'users': users, 'notes': notes, 'add_user_form': add_user_form, 'categories': categories, 'selected_category': selected_category})
 
 @login_required
 def group_create(request):
@@ -245,9 +250,15 @@ def notes(request):
     return render(request, 'authentication/notes.html', {'notes': notes, 'form': form})
 
 def notes_list(request):
+    categories = Category.objects.all()
     notes = Note.objects.filter(owner=request.user.pk)
-    context = {'notes': notes}
+    selected_category = request.GET.get('category')
+    if selected_category:
+        notes = notes.filter(category__id=selected_category)
+    context = {'notes': notes, 'categories': categories, 'selected_category': selected_category}
     return render(request, 'authentication/notes_list.html', context)
+
+
 
 @login_required
 def update_note_view(request, pk):

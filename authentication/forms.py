@@ -3,7 +3,11 @@ from .models import Note
 from django.contrib.auth.models import Permission
 from django.contrib.auth import get_user_model
 from .models import MyGroup
+from .models import Category
 
+class CategoryForm(forms.Form):
+    category = forms.ModelChoiceField(queryset=Category.objects.all())
+    
 class GroupForm(forms.ModelForm):
     class Meta:
         model = MyGroup

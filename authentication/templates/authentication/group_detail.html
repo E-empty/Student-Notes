@@ -1,7 +1,7 @@
-{% extends 'base.html' %}
+﻿{% extends 'base.html' %}
 
 {% block content %}
-  
+
   <h2>Informacje o grupie</h2>
   <p>Nazwa: {{ group.name }}</p>
   <p>Właściciel: {{ group.owner }}</p>
@@ -10,9 +10,10 @@
   <form method="post">
     {% csrf_token %}
     {{ add_user_form.as_p }}
-    <button type="submit" class="btn btn-primary">Dodaj</button>
+    <button type="submit">Dodaj</button>
   </form>
   {% endif %}
+  <a href="{% url 'group_list' %}">Powrót do listy grup</a>
   <h3>Użytkownicy w grupie:</h3>
   <ul>
   {% for user in users %}
@@ -30,6 +31,16 @@
 {% endfor %}
   </ul>
   <h3>Notatki w grupie:</h3>
+<form method="get">
+  <label for="category">Wybierz kategorię:</label>
+  <select name="category" id="category">
+    <option value="">Wszystkie</option>
+    {% for category in categories %}
+    <option value="{{ category.id }}" {% if selected_category == category.id %}selected{% endif %}>{{ category.name }}</option>
+    {% endfor %}
+  </select>
+  <button type="submit">Filtruj</button>
+</form>
 <ul>
   <div class="row">
     {% for note in notes %}
@@ -62,6 +73,5 @@
   {% empty %}
     <li>Brak notatek w grupie.</li>
   {% endfor %}
-  <button type="button" class="btn btn-primary" onclick="window.location.href='{% url 'group_list' %}'">Powrót do listy grup</button>
 </ul>
 {% endblock %}
