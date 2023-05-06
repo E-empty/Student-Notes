@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.forms import Select
 from django.contrib.auth.models import AbstractUser, Permission
+import os
 
 
 class MyGroup(models.Model):
@@ -67,10 +68,20 @@ class Note(models.Model):
     title = models.CharField(max_length=255)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     note = models.TextField()
-    picture = models.ImageField(null=True, blank=True, upload_to="media/")
+    picture = models.ImageField(null=True, blank=True, upload_to="")
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     groups = models.ManyToManyField(MyGroup)
 
     def __str__(self):
         return self.title
+    
+    def delete(self, *args, **kwargs):
+        super().delete(*args, **kwargs)
+
+        try:
+            self.picture.delete()
+            super().delete(*args, **kwargs)
+        except FileNotFoundError: 
+            pass
+

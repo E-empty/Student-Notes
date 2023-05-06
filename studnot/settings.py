@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'studnot.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  
-        'NAME': 'db5',  
+        'NAME': 'db7',  
         'USER': 'admin',  
         'PASSWORD': 'Pass1234',  
         'HOST': 'myfirstsql.ci79dxbneeek.us-east-1.rds.amazonaws.com',  
@@ -137,7 +137,7 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_ROOT = os.path.join(BASE_DIR,  '/media')
+MEDIA_ROOT = 'C:/media'
 
 MEDIA_URL = '/media/'
 

@@ -5,28 +5,36 @@
   <h2>Lista grup</h2>
   <ul>
     {% for group in groups %}
-    {% if group.name == request.user.username %}
-    <li>
-    <a href="{% url 'group_detail' group.id %}">{{ group.name }}</a>
-    </li>
-    {% else %}
-      <li>
-        <a href="{% url 'group_detail' group.id %}">{{ group.name }}</a>
-        {% if user == group.owner %}
-        <a href="{% url 'group_update' group.id %}" class="btn btn-primary btn-sm">Edytuj</a>
-        <a href="{% url 'group_delete' group.id %}" class="btn btn-danger btn-sm">Usuń</a>
-        {% endif %}
-      </li>
-    {% endif %}
-  {% endfor %}
+      {% if group.name == request.user.username %}
+        <li>
+          <a href="{% url 'group_detail' group.id %}">{{ group.name }}</a>
+        </li>
+      {% else %}
+        <li>
+          <a href="{% url 'group_detail' group.id %}">{{ group.name }}</a>
+          {% if user == group.owner %}
+            <form action="{% url 'group_update' group.id %}">
+              <button type="submit" class="btn btn-primary btn-sm">Edytuj</button>
+            </form>
+            <form action="{% url 'group_delete' group.id %}">
+              <button type="submit" class="btn btn-danger btn-sm">Usuń</button>
+            </form>
+          {% endif %}
+        </li>
+      {% endif %}
+    {% endfor %}
     {% if not groups %}
       <li>Nie znaleziono żadnych grup.</li>
       <a href="{% url 'group_create' %}" class="card-link">Stwórz grupę</a>
       <a href="{% url 'home'  %}" class="card-link">Powrót do strony głównej</a>
     {% endif %}
   </ul>
-      <div class="card-body">
-        <a href="{% url 'group_create' %}" class="card-link">Stwórz grupę</a>
-        <a href="{% url 'home'  %}" class="card-link">Powrót do strony głównej</a>
-      </div>
+  <div class="card-body">
+    <form action="{% url 'group_create' %}">
+      <button type="submit" class="btn btn-primary btn-sm">Stwórz grupę</button>
+    </form>
+    <form action="{% url 'home' %}">
+      <button type="submit" class="btn btn-primary btn-sm">Powrót do strony głównej</button>
+    </form>
+  </div>
 {% endblock %}

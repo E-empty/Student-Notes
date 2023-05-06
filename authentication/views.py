@@ -228,7 +228,10 @@ def create_note_view(request):
                 fs = FileSystemStorage()
                 filename = fs.save(image_file.name, image_file)
                 uploaded_file_url = fs.url(filename)
-                note.picture = uploaded_file_url[6:]
+                print(uploaded_file_url)
+                print("kurwa przerwa")
+                print(uploaded_file_url[6:])
+                note.picture = uploaded_file_url
             note.save()
 
             group_id = request.POST.get('groups')

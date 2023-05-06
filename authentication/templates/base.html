@@ -1,4 +1,6 @@
 {% load static %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'navbar.js' %}"></script>  
 {% load sass_tags %}
 {% load bootstrap5 %}
 {% bootstrap_css %}
@@ -15,26 +17,28 @@
 </head>
 <body>
     {% bootstrap_messages %}
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{% url 'home' %}">
-            <img src="{% static 'images/logo.png' %}" alt="logo" style="height: 50px; vertical-align: middle;">
-            <span style="font-size: 24px; vertical-align: middle;">Student Notes</span>
-          </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+    <nav class="navbar navbar-expand-custom navbar-mainbg">
+        <a class="navbar-brand navbar-logo" href="{% url 'home' %}">Student-Notes</a>
+        <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars text-white"></i>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
                 {% if user.is_authenticated %}
+                <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'notes' %}">Moje notatki</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'create_notes' %}">Stwórz notatke</a>
+                    <a class="nav-link active" href="{% url 'create_notes' %}">Stwórz notatkę</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'group_list' %}">Grupy</a>
                 </li>
+                {% endif %}
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'signout' %}">Wyloguj się</a>
                 </li>
@@ -49,7 +53,10 @@
             </ul>
         </div>
     </nav>
-
+      
+      
+    
+      
     <div class="container">
         {% block content %}
         {% endblock %}

@@ -10,10 +10,9 @@
   <form method="post">
     {% csrf_token %}
     {{ add_user_form.as_p }}
-    <button type="submit">Dodaj</button>
+    <button type="submit" class="btn btn-primary">Dodaj</button>
   </form>
   {% endif %}
-  <a href="{% url 'group_list' %}">Powrót do listy grup</a>
   <h3>Użytkownicy w grupie:</h3>
   <ul>
   {% for user in users %}
@@ -39,7 +38,7 @@
     <option value="{{ category.id }}" {% if selected_category == category.id %}selected{% endif %}>{{ category.name }}</option>
     {% endfor %}
   </select>
-  <button type="submit">Filtruj</button>
+  <button type="submit" class="btn btn-info">Filtruj</button>
 </form>
 <ul>
   <div class="row">
@@ -53,8 +52,7 @@
               <p class="card-text">{{ note.note }}</p>   
               <br>           
               {% if note.picture %}
-              <img src="{{ note.picture.url }}"
-              width=500>
+              <img src="{{ note.picture }}" class="img-fluid" alt="{{ note.title }}">
               {% endif %}
               <br>
               {% if note.owner == request.user or group.owner == request.user%}
@@ -73,5 +71,6 @@
   {% empty %}
     <li>Brak notatek w grupie.</li>
   {% endfor %}
+  <button type="button" class="btn btn-primary" onclick="window.location.href='{% url 'group_list' %}'">Powrót do listy grup</button>
 </ul>
 {% endblock %}
