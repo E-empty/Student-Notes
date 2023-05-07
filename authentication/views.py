@@ -228,9 +228,6 @@ def create_note_view(request):
                 fs = FileSystemStorage()
                 filename = fs.save(image_file.name, image_file)
                 uploaded_file_url = fs.url(filename)
-                print(uploaded_file_url)
-                print("kurwa przerwa")
-                print(uploaded_file_url[6:])
                 note.picture = uploaded_file_url
             note.save()
 
@@ -261,17 +258,25 @@ def notes_list(request):
     context = {'notes': notes, 'categories': categories, 'selected_category': selected_category}
     return render(request, 'authentication/notes_list.html', context)
 
-
-
-@login_required
 def update_note_view(request, pk):
     note = get_object_or_404(Note, pk=pk)
-
     if request.method == 'POST':
         form = NoteForm(request.POST, request.FILES, instance=note)
+        picture_action = request.POST.get('picture_action')
         if form.is_valid():
+            note = form.save(commit=False)
+            note.owner = request.user
             if not note.category:  # jeśli kategoria nie została wybrana w formularzu
                 note.category = note.category  # użyj domyślnej kategorii notatki
+            if 'picture' in request.FILES:
+                image_file = request.FILES['picture']
+                fs = FileSystemStorage()
+                filename = fs.save(image_file.name, image_file)
+                uploaded_file_url = fs.url(filename)
+                note.picture = uploaded_file_url
+            note.save()
+        if picture_action == 'delete':
+            note.picture.delete()
         note.save()
         return redirect('notes_list')
     else:
@@ -288,6 +293,5 @@ def delete_note_view(request, pk):
         note.delete()
         return redirect('notes_list')
     return render(request, 'authentication/delete_note.html', {'note': note})
-
 
 
